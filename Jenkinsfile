@@ -24,14 +24,6 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'docker build -t mywebsite .'
-                sh 'docker rm -f mywebsite || true'
-                sh 'docker run -d --name mywebsite -p 8081:80 mywebsite'
-            }
-
-        }
     }
 
     post {
