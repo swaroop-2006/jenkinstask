@@ -26,13 +26,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh '''
-                mkdir -p deploy
-                cp index.html deploy/
-                cp style.css deploy/
-                cp script.js deploy/
-                '''
+                sh 'docker build -t mywebsite .'
+                sh 'docker rm -f mywebsite || true'
+                sh 'docker run -d --name mywebsite -p 8081:80 mywebsite'
             }
+
         }
     }
 
